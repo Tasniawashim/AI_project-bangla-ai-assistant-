@@ -1,108 +1,109 @@
-# Bangla AI Chatbot (RAG + Voice Enabled)
+# 🤖 AmarBot: Voice-Enabled Bangla RAG Assistant
 
-This is a **Retrieval-Augmented Generation (RAG)** based AI Chatbot capable of answering questions in Bengali on specific topics. It uses **Groq (Llama 3.1)** for reasoning and **gTTS** for voice output.
-
-## 🚀 Features
-- **Topic Detection:** Automatically detects topics (Education, Health, Sports, Technology, Travel).
-- **RAG Architecture:** Fetches answers strictly from a predefined local dataset (`dataset.py`) to prevent hallucinations.
-- **Voice Output (TTS):** Reads the answer aloud in Bengali using Google Text-to-Speech.
-- **Demo Questions:** Sidebar with clickable/viewable demo questions for testing.
-- **Fast Response:** Powered by the `llama-3.1-8b-instant` model via Groq API.
-
-## 🛠️ Tech Stack
-- **Frontend:** Streamlit
-- **LLM:** Groq (Llama 3.1)
-- **Embeddings:** HuggingFace (`all-MiniLM-L6-v2`)
-- **Vector DB:** ChromaDB
-- **Audio:** gTTS (Google Text-to-Speech)
+**AmarBot** is an intelligent AI Chatbot built on the **Retrieval-Augmented Generation (RAG)** architecture. It is designed to provide highly accurate, hallucination-free answers in Bengali by fetching information from a curated local dataset. Additionally, it features an integrated **Voice Output (TTS)** system to read responses aloud.
 
 ---
 
-## ⚙️ Installation & Setup
+## ✨ Key Features
 
-Follow these steps to run the project on your local machine.
+* **🎯 Context-Aware RAG:** Answers are grounded strictly in the `dataset.py` knowledge base to ensure reliability.
+* **🔊 Bengali Voice Synthesis:** Real-time audio generation using **gTTS** (Google Text-to-Speech).
+* **⚡ Ultra-Low Latency:** Inference is powered by **Llama-3.1-8b** via the **Groq LPU** for near-instant responses.
+* **🧠 Intelligent Topic Detection:** Automatically classifies queries into Education, Health, Sports, Tech, and Travel.
+* **🎨 Interactive UI:** A clean, modern Streamlit dashboard with built-in demo questions.
 
-### 1. Prerequisites
-- Python 3.8 or higher installed.
-- A Groq API Key (Get it from [console.groq.com](https://console.groq.com)).
+---
 
-### 2. Clone or Download
-Download the project folder and navigate to it in your terminal.
+## 🛠 Tech Stack
+
+| Component | Technology |
+| --- | --- |
+| **Language Model** | Llama-3.1-8b-instant (via Groq) |
+| **Vector Store** | ChromaDB |
+| **Embeddings** | HuggingFace (`all-MiniLM-L6-v2`) |
+| **Frontend** | Streamlit |
+| **Speech Engine** | gTTS (Google Text-to-Speech) |
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Clone the Repository
 
 ```bash
+git clone https://github.com/your-username/Bangla_Chatbot.git
 cd Bangla_Chatbot
+
 ```
 
-# 3. Create a Virtual Environment (Optional but Recommended)
-Bash
+### 2. Set Up Virtual Environment
 
-### Windows
-```
+```bash
 python -m venv venv
-```
-```
+# Windows:
 .\venv\Scripts\activate
-```
-### Mac/Linux
-```
-python3 -m venv venv
-```
-```
+# Mac/Linux:
 source venv/bin/activate
-```
-# 4. Install Dependencies
-Make sure you have requirements.txt in the folder. Then run:
 
 ```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+
 ```
 
-# 5. Set API Key
-You can set the API key in two ways:
+### 4. Configure API Keys
 
-Create a .env file in the root folder and add:
-```
+Create a `.env` file in the root directory and add your Groq API key:
+
+```env
 GROQ_API_KEY=your_actual_api_key_here
-OR, open app.py and manually paste your key in the api_key variable fallback section.
-```
-
-
-# ▶️ How to Run
-Run the Streamlit app using the following command:
 
 ```
+
+### 5. Run the Application
+
+```bash
 streamlit run app.py
-```
-The app will open automatically in your browser at http://localhost:8501.
-``` 
 
-📂 Project Structure
+```
+
+---
+
+## 📂 Project Structure
+
+```text
 Bangla_Chatbot/
-│
+├── app.py           # Core application logic & Streamlit UI
+├── dataset.py       # Knowledge base (Source of truth)
+├── requirements.txt # Project dependencies
+├── .env             # Environment variables (API Keys)
+└── README.md        # Project documentation
 
-├── app.py   
-├── dataset.py         
-├── requirements.txt   
-├── .env                
-└── README.md           
-
-You can ask questions related to:
-```
-Education (শিক্ষা) - e.g.,
- "এইচএসসি পরীক্ষা কবে হতে পারে?"
-
-Health (স্বাস্থ্য) - e.g., "ডেঙ্গু জ্বরের লক্ষণ কী?"
-
-Sports (খেলাধুলা) - e.g., "লিওনেল মেসি কোন দেশের খেলোয়াড়?"
-
-Technology (প্রযুক্তি) - e.g., "র‍্যাম এর কাজ কী?"
-
-Travel (ভ্রমণ) - e.g., "সাজেক ভ্যালি কোথায় অবস্থিত?"
 ```
 
-# ⚠️ Troubleshooting
-Error: streamlit is not recognized: Make sure you installed the requirements and activated the virtual environment.
+---
 
-Error: API Key missing: Ensure your Groq API key is valid and placed correctly in .env or app.py.
+## 🔍 How it Works
 
-Audio not playing: Ensure you have a stable internet connection for gTTS to generate audio.
+1. **Ingestion:** The chatbot reads text from `dataset.py` and converts it into mathematical vectors using HuggingFace embeddings.
+2. **Retrieval:** When you ask a question, ChromaDB finds the most relevant piece of information.
+3. **Generation:** Llama 3.1 synthesizes the retrieved data into a natural-sounding Bengali response.
+4. **Speech:** The text response is converted to an MP3 file and played automatically.
+
+---
+
+## ⚠️ Troubleshooting
+
+* **API Key Error:** Ensure your `.env` file is named correctly and the key is valid.
+* **No Audio:** An active internet connection is required for **gTTS** to generate the voice files.
+* **Package Errors:** If `streamlit` is not recognized, ensure your virtual environment is activated before running the app.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
